@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+    <title>View</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Maker</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td><span th:text="${product.name}"></span></td>
+        <td><span th:text="${product.description}"></span></td>
+        <td><span th:text="${#numbers.formatDecimal(product.priceWithDiscount, 0, 'COMMA', 2, 'POINT')}"></span></td>
+        <td><span th:text="${product.makerName}"></span></td>
+    </tr>
+    </tbody>
+</table>
+<div sec:authorize="hasRole('ADMIN')">
+    <a href="/order/admin">
+        <button>Go to all Orders</button>
+    </a>
+    <a th:href="${referer}">
+        <button>Go to this user's Orders</button>
+    </a>
+</div>
+<div sec:authorize="hasRole('CUSTOMER')">
+    <a href="/order/customer">
+        <button>Back to My Orders</button>
+    </a>
+</div>
+</body>
+</html>

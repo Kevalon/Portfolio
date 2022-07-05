@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+    <title th:text="${title}">
+    </title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Amount in Shop</th>
+        <th>Maker</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td><span th:text="${product.name}"></span></td>
+        <td><span th:text="${product.description}"></span></td>
+        <td><span th:text="${#numbers.formatDecimal(product.priceWithDiscount, 0, 'COMMA', 2, 'POINT')}"></span></td>
+        <td><span th:text="${product.amount}"></span></td>
+        <td><span th:text="${product.makerName}"></span></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <form th:action="|@{/catalogue/}${productId}|" method="POST">
+        <p>
+            <input class="btn btn-success btn-block" type="submit" value="Add to Cart"/>
+        </p>
+    </form>
+    <p th:if="${error}" >
+        Sorry, this product is not available anymore.
+    </p>
+    <p th:if="${success}" >
+        Product was successfully added to the cart!
+    </p>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <form th:action="|@{/catalogue/}${productId}/edit|" method="GET">
+            <p>
+                <input class="btn btn-success btn-block" type="submit" value="Edit Product"/>
+            </p>
+        </form>
+        <form th:action="|@{/catalogue/}${productId}/delete|" method="GET">
+            <p>
+                <input class="btn btn-success btn-block" type="submit" value="Delete Product"/>
+            </p>
+        </form>
+    </div>
+    <a href="/catalogue">
+        <button>Back to Catalogue</button>
+    </a>
+</div>
+
+</body>
+</html>

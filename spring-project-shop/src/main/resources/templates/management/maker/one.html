@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Products amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="maker : ${makers}">
+        <td><span th:text="${maker.id}"></span></td>
+        <td><span th:text="${maker.name}"></span></td>
+        <td><span th:text="${maker.description}"></span></td>
+        <td><span th:text="${maker.productsAmount}"></span></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <div>
+        <form th:action="|@{/management/maker/}${makerId}/edit|" method="GET">
+            <p>
+                <input class="btn btn-success btn-block" type="submit" value="Edit Maker"/>
+            </p>
+        </form>
+        <form th:action="|@{/management/maker/}${makerId}/delete|" method="GET">
+            <p>
+                <input class="btn btn-success btn-block" type="submit" value="Delete Maker"/>
+            </p>
+        </form>
+        <div th:if="${error}">
+            <p>Failed to delete maker. Check if this maker still has products in the shop</p>
+        </div>
+        <div>
+            <a href="/management/maker">
+                <button>Go back</button>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

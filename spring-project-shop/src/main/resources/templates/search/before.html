@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<body>
+<div th:fragment="content">
+    <div  class="page-header">
+        <h2 class="text-center">Search</h2>
+    </div>
+    <form th:action="@{/catalogue/search}" method="post" th:object="${searchForm}">
+        <div class="form-group">
+            <label class="control-label" for="categoryName">Category</label>
+            <input type="text" class="form-control" id="categoryName" th:field="*{categoryName}" placeholder="Category" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="productName">Product Name</label>
+            <input type="text" class="form-control" id="productName" th:field="*{productName}" placeholder="Product Name" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="makerName">Maker Name</label>
+            <input type="text" class="form-control" id="makerName" th:field="*{makerName}" placeholder="Maker Name" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="minPrice">Minimum Price</label>
+            <input type="text" class="form-control" id="minPrice" th:field="*{minPrice}" placeholder="Minimum Price" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="maxPrice">Maximum Price</label>
+            <input type="text" class="form-control" id="maxPrice" th:field="*{maxPrice}" placeholder="Maximum Price" />
+        </div>
+
+        <input class="btn btn-success btn-block" type="submit" value="Search"/>
+    </form>
+</div>
+</body>
+</html>

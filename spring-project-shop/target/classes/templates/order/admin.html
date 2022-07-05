@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title>Orders</title>
+</head>
+<body>
+<h2>All Orders</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Order Id</th>
+        <th>User Id</th>
+        <th>Username</th>
+        <th>Date</th>
+        <th>Products</th>
+        <th>Total Cost</th>
+        <th>Customer Name</th>
+        <th>Customer Address</th>
+        <th>Customer Phone</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td><span th:text="${order.orderId}"></span></td>
+        <td><span th:text="${order.userId}"></span></td>
+        <td><span th:text="${order.username}"></span></td>
+        <td><span th:text="${order.creationDate}"></span></td>
+        <td><a th:href="|@{/order/}${order.orderId}|">view</a></td>
+        <td><span th:text="${#numbers.formatDecimal(order.totalSum, 0, 'COMMA', 2, 'POINT')}"></span></td>
+        <td><span th:text="${order.customerName}"></span></td>
+        <td><span th:text="${order.customerAddress}"></span></td>
+        <td><span th:text="${order.customerPhoneNumber}"></span></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <a href="/management">
+        <button>Back to Management</button>
+    </a>
+</div>
+</body>
+</html>

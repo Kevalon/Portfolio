@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title>All categories</title>
+</head>
+<body>
+<div>
+    <a href="/management">
+        <button>Back to Management</button>
+    </a>
+    <a href="/catalogue">
+        <button>Back to Catalogue</button>
+    </a>
+</div>
+<div>
+    <form th:action="|@{/management/category/add}|" method="GET">
+        <p>
+            <input class="btn btn-success btn-block" type="submit" value="Add new Category"/>
+        </p>
+    </form>
+</div>
+<h2>Existing Categories</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Products amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${categories}">
+        <td><span th:text="${category.id}"></span></td>
+        <td><a th:href="|@{/management/category/}${category.id}|" th:text="${category.name}"></a></td>
+        <td><span th:text="${category.description}"></span></td>
+        <td><span th:text="${category.productsAmount}"></span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

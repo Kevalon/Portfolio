@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Products amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${categories}">
+        <td><span th:text="${category.id}"></span></td>
+        <td><span th:text="${category.name}"></span></td>
+        <td><span th:text="${category.description}"></span></td>
+        <td><span th:text="${category.productsAmount}"></span></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <div>
+        <form th:action="|@{/management/category/}${categoryId}/edit|" method="GET">
+            <p>
+                <input class="btn btn-success btn-block" type="submit" value="Edit Category"/>
+            </p>
+        </form>
+        <form th:action="|@{/management/category/}${categoryId}/delete|" method="GET">
+            <p>
+                <input class="btn btn-success btn-block" type="submit" value="Delete Category"/>
+            </p>
+        </form>
+        <div th:if="${error}">
+            <p>Failed to delete category. Check if this category still contains products in the shop</p>
+        </div>
+        <div>
+            <a href="/management/category">
+                <button>Go back</button>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

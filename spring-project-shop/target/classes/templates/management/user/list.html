@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Users</title>
+</head>
+<body>
+<div>
+    <a href="/catalogue">
+        <button>Back to Catalogue</button>
+    </a>
+    <a href="/management">
+        <button>Back to Management</button>
+    </a>
+    <h2>Registered Users</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Email</th>
+            <th>Orders</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td><span th:text="${user.userId}"></span></td>
+            <td><span th:text="${user.username}"></span></td>
+            <td><span th:text="${user.roleName}"></span></td>
+            <td><span th:text="${user.email}"></span></td>
+            <td><a th:href="|@{/management/user/}${user.userId}|" th:text="view"></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
